@@ -1,21 +1,28 @@
 class Solution {
-    public double myPow(double x, int n) {
+    public double myPow(double x, long n) {
         
-        if(x==1 || n==0)
+        // since x^n== (x^2)^n/2 id n is even
+        //if n is odd, x^n-1 is even we use
+        // x^n== x*(x)^n-1 where n-1 will be even for next iteration
+        // if n is even same principle, just do 1/x instead of x
+        // x=-ve then x^n=  -1 * x^n, n=odd
+        // if n i even x^n is same
+        
+        
+        if(n==0|| x==1){
             return 1;
-        if(x==0)
-            return 0;
-       
-        if(x>0){
-            return Math.exp(n*Math.log(x));
+        }
+        if(n<0){
+            n = -n;
+            x = 1/x;
+            
+        }
+        if(n%2==0){
+            return myPow(x*x,n/2);        
         }
         else{
-            if(n%2==0){
-                 return Math.exp(n*Math.log(Math.abs(x)));
-            }
-            else{
-                 return -1*Math.exp(n*Math.log(Math.abs(x)));
-            }
+            
+             return x*myPow(Math.abs(x),(n-1));
         }
         
         
