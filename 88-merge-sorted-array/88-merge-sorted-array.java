@@ -1,46 +1,37 @@
-import java.util.*;
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        //merge step of merge sort
         
-        int left=0;
-        int right=0;
-        ArrayList<Integer> l1= new ArrayList<>();
         
-        while(left<m && right<n){
-            
-            System.out.println(left);
-            if(nums1[left]<= nums2[right]){
-                 
-                l1.add(nums1[left]);
-                left++;
-                
-            
+        int left=m-1;
+        int right=n-1;
+        int last=m+n-1;
+        
+        if(m==0){
+            //O(m)
+            while(right>=0){
+                 nums1[last--] = nums2[right];
+                right--;
             }
-            else{
-                 l1.add(nums2[right]);
-                  right++;
+           return;
+        }
+        while(left>=0 && right >=0){
+            System.out.println(left+" "+right);
+         if(nums1[left]>=nums2[right]){
+             nums1[last--] = nums1[left];
+             left--;
+            
+        }
+            
+        else{
+                nums1[last--] = nums2[right];
+                right--;
             }
-            
-            
-            
-        }
-        
-        while(right<n){
-            l1.add(nums2[right]);
-            right++;
-        }
-        while(left<m){
-            l1.add(nums1[left]);
-            left++;
-        }
-        for(int i=0;i<m+n;i++){
-            nums1[i]=l1.get(i);
-        }
-        
-        
-        
-        
         
     }
+        while(right>=0){
+            nums1[last--] = nums2[right];
+            right--;
+        }
+        
+}
 }
