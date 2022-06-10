@@ -17,6 +17,7 @@ class Solution {
         while(left>=0 && right >=0){
             System.out.println(left+" "+right);
          if(nums1[left]>=nums2[right]){
+             
              nums1[last--] = nums1[left];
              left--;
             
