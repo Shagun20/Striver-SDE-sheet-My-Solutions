@@ -14,6 +14,7 @@ class Solution {
             if(h1.containsKey(target-nums[i])){
                 ans[0]= h1.get(target-nums[i]);
                 ans[1]= i;
+                break;
             }
            else if(!h1.containsKey(nums[i])){
                 h1.put(nums[i], i);
