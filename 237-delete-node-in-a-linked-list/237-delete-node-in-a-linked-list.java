@@ -9,18 +9,11 @@
 class Solution {
     public void deleteNode(ListNode node) {
         
-        while(node.next.next!=null){
-             node.val=node.next.val;
-             node=node.next;
-        }
-        
-        //node is second last, now the last node
+       //copy the value of next node to current node
+        // delete the next node instead
         
         node.val=node.next.val;
-        node.next=null;
-            
-        
-       
+        node.next=node.next.next;
        
         
         
