@@ -17,10 +17,7 @@ class Solution {
         // when end count==n
         // the one from end 
         
-        if(head.next==null){
-            head=null;
-            return head;
-        }
+       
         ListNode delnode=remove(head, n);//if head is returned
         if(delnode!=null){
             head=delnode.next;
