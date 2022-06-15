@@ -23,31 +23,32 @@ public class Solution {
         // assuming a has more length
         
         ListNode  n1 = headA;
-        ListNode n2= headB;
+        
         int l1=0, l2=0;
         while(n1!=null){
             n1=n1.next;
             l1++;
         }
-        while(n2!=null){
-            n2=n2.next;
+        n1= headB;
+        while(n1!=null){
+            n1=n1.next;
             l2++;
         }
-        n1=headA; n2= headB;
+        
         while(l1-l2>0){
-            n1=n1.next;
+           headA=headA.next;
             l1--;
         }
         while(l2-l1>0){
-            n2=n2.next;
+            headB=headB.next;
             l2--;
         }
         
-        while(n1!=n2){
-            n1=n1.next;
-            n2=n2.next;
+        while(headA!=headB){
+           headA=headA.next;
+           headB=headB.next;
         }
         
-        return n1;
+        return headA ;
     }
 }
