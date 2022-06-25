@@ -1,0 +1,87 @@
+<code>
+
+public class Solution {
+    public int findMedian(int[][] A) {
+        
+        int n = A.length;
+        int m = A[0].length;
+        
+        
+        
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+        for( int i = 0 ; i < n ; i++ ){
+            for( int j = 0 ; j < m ; j++ ){
+                min = Math.min(min,A[i][j]);
+                max = Math.max(max,A[i][j]);
+            }
+        }
+        
+        int start = min ,end = max ;
+        int mid = 0, middle = (n*m+1)/2;
+        
+        while( start <= end ){
+            // System.out.println( " start = " + start + " end = " + end );
+            mid = (start+end)/2;
+            // System.out.println( " mid = " + mid + " middle = " + middle );
+            int count = check(A,mid);
+            // System.out.println( " count = " + count );
+            if( count == middle ){
+                break;
+            }
+            else if( count < middle ){
+                // System.out.println( " start changed ");
+                start = mid+1;
+            }
+            else{
+                // System.out.println( " end changed ");
+                end = mid-1;
+            }
+        }
+        // return mid;
+        //System.out.println( mid );
+        return closest(A,mid);
+        
+    }
+    
+    private int closest( int[][] A, int mid ){
+        
+        int min = Integer.MAX_VALUE;
+        int num = mid;
+        for( int i = 0 ; i < A.length ; i++ ){
+            for( int j = 0 ; j < A[0].length ; j++ ){
+                if( mid-A[i][j] >= 0 && mid-A[i][j] < min ){
+                    min = mid-A[i][j];
+                    num = A[i][j];
+                }
+            }
+        }
+        return num;
+    }
+    
+    private int check( int[][] A, int mid ){
+        int count = 0 ;
+        int n = A.length , m = A[0].length;
+        int middle = (n*m+1)/2;
+        int equal = 0;
+        for( int i = 0 ; i < A.length ; i++ ){
+            for( int j = 0 ; j < A[0].length ; j++ ){
+                if( A[i][j] < mid ){
+                    count++;
+                }
+                if( A[i][j] == mid ){
+                    equal++;
+                }
+            }
+        }
+        
+        if( count < middle && count+equal >= middle ){
+            return middle;
+        }
+        return count+equal;
+        
+    }
+}
+
+
+
+</code>
