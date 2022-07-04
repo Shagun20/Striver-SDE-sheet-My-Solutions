@@ -1,33 +1,35 @@
 class Solution {
     public String reverseWords(String s) {
         
-        ArrayList<String> ans= new ArrayList<>();
-        int count=0;
-        int i=0;
-        while(i<s.length()){
-            String s1="";
-            
-            while(i<s.length() && s.charAt(i)!=' '){
-                s1=s1+s.charAt(i);
-                i++;
-            }
-            if(!s1.equals("")){
-                ans.add(s1);
-            }
-            
-             while(i<s.length() && s.charAt(i)==' '){
-                i++;
-            }
-            
-        }
-              
-             
-        String a="";
+        //store the numbers in a stack and then add them to the final ans
         
-        for(i=ans.size()-1;i>0;i--){
-            a=a.concat(ans.get(i))+" ";
+        //or use split method to remove the spaces, and store the strings of resulting array, and traverse from back, and storer into final string ans, still require extra array space
+        
+        //start traversing from back, and store the alphabets in a string by conactenating at the first position, then keep doing this till a space is notencountered
+        
+        String ans=new String();
+        //empty string
+          String s1="";
+        for(int i=s.length()-1;i>=0;i--){
+          
+            if(s.charAt(i)!=' ')
+            {
+                //add the string if not empty to final ans witha  a space
+                 s1=s.charAt(i)+s1;
+              
+                
+            }
+            
+            else{
+                 if(!s1.equals("")) ans=ans+s1+" ";
+                 s1="";
+            }
+                
+            
         }
-         a=a.concat(ans.get(0));
-        return a;
+        if(!s1.equals("")) ans=ans+s1;
+              
+        return ans.trim();
+        
     }
 }
