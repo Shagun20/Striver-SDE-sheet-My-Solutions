@@ -5,11 +5,6 @@ class Solution {
          int max= Integer.MAX_VALUE;
         
         
-        //we will first find out the length from start where we stop getting a number 
-        //then we just 
-       
-        
-        int flag=0;
         int sign=1;
         int ans=0;
        
@@ -27,13 +22,12 @@ class Solution {
                 continue;
             
             if(!Character.isDigit(ch)){
-                //flag=1 denotes we have already encountered a digit before
                 break;
             }
             
             
             if(Character.isDigit(ch)){
-                flag=1;
+                
                 int digit= Character.getNumericValue(ch);
                 if(sign==1){
                     if(ans>max/10 || ans==max/10 && digit>7)
