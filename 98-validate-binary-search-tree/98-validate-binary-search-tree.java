@@ -13,36 +13,21 @@
  *     }
  * }
  */
+//O(n) approach
 class Solution {
     public boolean isValidBST(TreeNode root) {
+        return helper(root,Long.MIN_VALUE,Long.MAX_VALUE);
+    }
+    
+    public boolean helper(TreeNode root, long min, long max){
         
-        if(root==null){
+        if(root==null)
             return true;
+        if(min<root.val && root.val<max){
+           return helper(root.left,min ,(long)root.val) && helper(root.right, (long)root.val,max);
+            
         }
         
-        //all ele in left subtree should be less than root
-        //all ele in right treee are more than root
-        
-        TreeNode rightmost= root.left;
-        while(rightmost !=null && rightmost.right !=null){
-            rightmost=rightmost.right;
-        }
-        
-        if(rightmost!=null && root.val<=rightmost.val){
-            return false;
-        }
-        
-         TreeNode leftmost= root.right;
-        
-        while(leftmost!=null && leftmost.left!=null){
-            leftmost=leftmost.left;
-        }
-        
-        if(leftmost!=null && root.val>= leftmost.val){
-            return false;
-        }
-       
-        
-        return (isValidBST(root.left)&& isValidBST(root.right));
+        return false;
     }
 }
