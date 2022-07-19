@@ -24,7 +24,7 @@ class Solution {
         if(root==null)
             return true;
         if(min<root.val && root.val<max){
-           return helper(root.left,min ,(long)root.val) && helper(root.right, (long)root.val,max);
+           return helper(root.left,min ,root.val) && helper(root.right, (long)root.val,max);
             
         }
         
