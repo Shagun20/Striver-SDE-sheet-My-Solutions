@@ -2,7 +2,7 @@ class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         
         //recursion 
-                if (image[sr][sc] == color) return image;
+             //   if (image[sr][sc] == color) return image;
 
         
       return color(image, sr, sc, image[sr][sc], color);
@@ -22,6 +22,9 @@ class Solution {
             return image;
         }
         
+        if(image[sr][sc]==color){
+            return image;
+        }
         if(image[sr][sc]==precol){
             
         image[sr][sc]=color;
