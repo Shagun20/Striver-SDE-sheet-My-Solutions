@@ -2,37 +2,36 @@ class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         
         
-        int left=m-1;
-        int right=n-1;
-        int last=m+n-1;
+        //the last ele will be the max of 
         
-        if(m==0){
-            //O(m)
-            while(right>=0){
-                 nums1[last--] = nums2[right];
-                right--;
+        int h= m+n-1;
+        int i=m-1;
+        int j=n-1;
+        while(j>=0){
+            if(i<0){
+                while(j>=0){
+                nums1[h]=nums2[j];
+                h--;
+                j--;
+                }
+                break;
             }
-           return;
-        }
-        while(left>=0 && right >=0){
-            System.out.println(left+" "+right);
-         if(nums1[left]>=nums2[right]){
-             
-             nums1[last--] = nums1[left];
-             left--;
+            if(nums2[j]>=nums1[i]){
+                nums1[h]=nums2[j];
+                h--;
+                j--;
+            }
+            
+            else{
+                nums1[h]=nums1[i];
+                h--;
+                i--;
+            }
+            
             
         }
-            
-        else{
-                nums1[last--] = nums2[right];
-                right--;
-            }
+        
+        
         
     }
-        while(right>=0){
-            nums1[last--] = nums2[right];
-            right--;
-        }
-        
-}
 }
