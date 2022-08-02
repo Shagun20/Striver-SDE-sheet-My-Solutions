@@ -11,50 +11,42 @@
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         
-        
-        // merge op in arrays
-        // if ptr1 is less than ptr2, its in right pos check for ptr1++ , else, 
-        // if ptr1 > ptr2, place ptr2 before ptr1 and delete ptr2 from 2nd list
-        // shift ptr2 to next node
-        
-        
-        ListNode pl=null, pr=null, left=list1, right=list2;
-        
-        if(left==null){
+        if(list1==null){
             return list2;
         }
         
-        while(left!=null && right != null){
-            
-            if(left.val<right.val){
-                pl=left;
-                left=left.next;
-                
-            }
-            
-            else{
-                pr=right;
-                right=right.next;
-                pr.next=left;
-                
-                if(pl==null){
-                    list1=pr;
-                    pl=list1;
-                }
-                
-                else{
-                    pl.next=pr;
-                    pl=pr;
-                
-                }
-                
-            }
-            
-        }
-        if(left==null){
-            pl.next=right;
-        }
+        if(list2==null)
+            return list1;
         
+        
+        ListNode prev1=null, p1=list1,p2=list2;
+      
+         while(p2!=null){
+             
+             if(p1==null){
+                 prev1.next=p2;
+                 break;
+             }
+            
+             
+            if(p1.val<p2.val){
+                
+                prev1=p1;
+                p1=p1.next;
+            }
+             
+             else{
+                 
+                 ListNode new1=p2;
+                 p2=p2.next;
+                 new1.next=p1;
+                 if(prev1!=null)prev1.next=new1;
+                 else
+                     list1=new1;
+                 prev1= new1;
+             }
+            
+        }
         return list1;
     }
 }
