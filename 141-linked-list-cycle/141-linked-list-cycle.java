@@ -11,30 +11,35 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        //floyd detection
         
         
-        // keep iterating slowly one pointer for each node,
-        // mark it as one time visited
-        // keep fast moving 2 steps ahead
-        // if fast comes back to same position as slow somehow,
-        // there must be a cycle in ll
+        //if I can reach a node again 
+        //by traversing the linked list
+        //if slow and fast overlap someday
+        //mean a cycle is there
+        if(head==null)
+            return false;
         
-        ListNode slow=head, fast=head;
-        if(fast==null){
+        if(head.next==null){
             return false;
         }
+        
+        
+        ListNode slow=head;
+        ListNode fast=head;
+        
         while(fast!=null && fast.next!=null){
             
             slow=slow.next;
             fast=fast.next.next;
+            
             if(slow==fast){
                 return true;
             }
+            
         }
+        
         return false;
         
-        // if null is slow means no such cycle
-    
     }
 }
