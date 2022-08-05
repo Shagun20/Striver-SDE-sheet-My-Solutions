@@ -1,46 +1,56 @@
 class MyQueue {
-//use 2 stacks
-    //fill the stack pop when required
-    //until then keep filling in ele in the stack push
-    Stack<Integer> s1=new Stack<>();
-    Stack<Integer> s2=new Stack<>();
 
+    
+    Stack<Integer> stack, queue;
     public MyQueue() {
-        
+        stack=new Stack<>();
+        queue=new Stack<>();
     }
     
     public void push(int x) {
         
-        s1.push(x);
+        stack.push(x);
         
     }
     
     public int pop() {
-        if(s2.empty()){
-            while(!s1.empty()){
-                s2.push(s1.pop());
+        
+        if(!queue.isEmpty())
+        {
+            return queue.pop();
+        }        
+        
+        else{
+            
+            while(!stack.empty()){
+                queue.push(stack.pop());
             }
+            
+            return queue.pop();
+            
+            
         }
-        
-        return s2.pop();
-        
     }
     
     public int peek() {
         
-        if(s2.empty()){
-            while(!s1.empty()){
-                s2.push(s1.pop());
+        if(!queue.isEmpty())
+            return queue.peek();
+        
+        else{
+            
+            while(!stack.empty()){
+                queue.push(stack.pop());
             }
             
+            return queue.peek();
         }
-        return s2.peek();
         
     }
     
     public boolean empty() {
-       
-        return s1.empty()&&s2.empty();
+        
+        return (stack.isEmpty()&& queue.isEmpty());
         
     }
 }
