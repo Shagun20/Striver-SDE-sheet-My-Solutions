@@ -14,57 +14,26 @@
  * }
  */
 class Solution {
+  
+   
+    
     public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> ans= new ArrayList<>();
-    TreeNode current=root;
-        while(current!=null){
-             
-            
-            if(current.left==null){
-                //add to ans
-                ans.add(current.val);
-                //move to right
-                current=current.right;
-                
-            }
-            else{
-              
-                //we will first see and create  link to current node
-                //from rightmost child
-                
-                //so we will create a link
-                
-                TreeNode ptr=current.left;
-                //ptr can't be null
-                
-                //see if rightmost in left half already does not have a pointer
-                while(ptr.right!=null && ptr.right!=current){
-                    ptr=ptr.right;
-                }
-                
-                //if no link exists aready then create one
-                if(ptr.right==null){
-                     ptr.right=current;
-                      ans.add(current.val);
-                    //if link does not exist, add link and store current value in answer
-                     current=current.left;
-                    
-                }
-                  
-                else if(ptr.right==current){
-                    //break the link
-                    ptr.right=null;
-                   //if link exists already, just move rightside
-                    
-                    //move current ahead rightwards
-                    current=current.right;
-                }
-                
-                
-                
-            }
-            
-        }
-        return ans;
+        
+      List<Integer> ans= new ArrayList<>();
+      calculatepre(root, ans);
+      return ans;
+        
     }
+  
+   public void calculatepre(TreeNode root, List<Integer> ans){
+     
+     if(root==null){
+       return;
+     }
+     
+     ans.add(root.val);
+     calculatepre(root.left, ans);
+     calculatepre(root.right, ans);
+     
+   }
 }
