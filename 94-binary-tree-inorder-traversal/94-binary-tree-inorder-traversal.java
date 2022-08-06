@@ -23,8 +23,7 @@ class Solution {
       
       List<Integer> a1= inorderTraversal(root.left);
       a1.add(root.val);
-      List<Integer> a2= inorderTraversal(root.right);
-      a1.addAll(a2);
+      a1.addAll(inorderTraversal(root.right));
       
       return a1;
       
