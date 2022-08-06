@@ -15,25 +15,53 @@
  */
 class Solution {
   
-   
+    class Pair{
     
-    public List<Integer> preorderTraversal(TreeNode root) {
-        
-      List<Integer> ans= new ArrayList<>();
-      calculatepre(root, ans);
-      return ans;
-        
+      TreeNode root;
+      int id;
+      Pair(TreeNode root){
+        this.root=root;
+        this.id=0;
+      }
+      
     }
-  
-   public void calculatepre(TreeNode root, List<Integer> ans){
-     
-     if(root==null){
-       return;
-     }
-     
-     ans.add(root.val);
-     calculatepre(root.left, ans);
-     calculatepre(root.right, ans);
-     
-   }
+    public List<Integer> preorderTraversal(TreeNode root) {
+      
+      List<Integer> ans = new ArrayList<>();
+      Stack<Pair> stack= new Stack<>();
+      
+      stack.push(new Pair(root));
+      
+      while(!stack.isEmpty()){
+        
+        Pair pq= stack.peek();
+        
+        if(pq.root==null){
+          stack.pop();
+        }
+        
+        else if(pq.id==0){
+          ans.add(pq.root.val);
+          pq.id++;
+          stack.push(new Pair(pq.root.left));
+        }
+        
+        else if(pq.id==1){
+          
+          pq.id++;
+          stack.push(new Pair(pq.root.right));
+          
+          
+        }
+        
+        else{
+          
+          stack.pop();
+          
+        }
+      }
+      
+      
+        return ans;
+    }
 }
