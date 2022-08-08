@@ -19,7 +19,7 @@ class Solution {
       
       
       else{
-        return (1+ kthGrammar(n, k-p))%2;
+        return (1+ kthGrammar(n-1, k-p))%2;
       }
         
     }
