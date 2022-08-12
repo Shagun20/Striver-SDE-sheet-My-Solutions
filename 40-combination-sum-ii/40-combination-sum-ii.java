@@ -1,39 +1,48 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+      
+      Arrays.sort(candidates);
+         List<List<Integer>> a= new ArrayList<>();
+        subsetsum(new ArrayList<Integer>() ,candidates, target, 0 , a);
+        return a;
         
-        // similar to candidate sum and subset question
-        // to get the unique elements, apply same principle as subset sum
-        // if an element previously has been included already do not inlcude it in soln
-   
-     //for removing duplicates, remove the elements that might come up again, example, if one element has already been considered previously, don;t take its successive same elements
-        //sorting is required to identify this
+    }
+  
+  public void subsetsum(ArrayList<Integer> ans, int[] candidates, int target, int index,  List<List<Integer>> a){
         
-        //Each number in candidates may only be used once in the combination
-        Arrays.sort(candidates);
-        ArrayList<List<Integer>> ans =new ArrayList<>();
-        helper(candidates, target, new ArrayList<Integer>(), ans,0 );
-        return ans;
+        if(target==0){
+           
+          System.out.println(ans);
+         a.add(new ArrayList<>(ans));
+          return;
+            
+        }
+      
+       
+           
+          for(int i= index;i< candidates.length;i++){
+            
+            if(i>index && candidates[i]==candidates[i-1])
+              continue;
+            
+            if(target< candidates[i]){
+              break;
+            }
+            
+            ans.add(candidates[i]);
+            subsetsum(ans, candidates, target- candidates[i], i+1, a);
+            
+            ans.remove(ans.size()-1);
+            
+          
+            
+
+            
+        }
     }
     
-    public void helper(int[] nums,int target, ArrayList<Integer> values,ArrayList<List<Integer>> ans, int index ){
-       
-            if(target==0){
-                ans.add(new ArrayList<>(values));
-                 return;
-            }
-             if(index==nums.length){
-             return;
-              }  
-        if(target<nums[index]){
-            return;
-        }
-        values.add(nums[index]);
-        helper(nums,target-nums[index], values,ans, index+1 );
-        values.remove(values.size()-1);
-        while(index+1<nums.length && nums[index]==nums[index+1]){
-            index++;
-        }
-        helper(nums,target, values,ans,index+1);
-        
-    }
+  
+  
+  
+  
 }
