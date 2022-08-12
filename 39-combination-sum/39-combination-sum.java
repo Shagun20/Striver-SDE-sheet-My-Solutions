@@ -1,30 +1,50 @@
 class Solution {
+   
+      
+      
+    
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         
-        ArrayList<List<Integer>> ans= new ArrayList<>();
-        helper(ans, candidates, target, new ArrayList<>(), 0);
-        return ans;
+        Arrays.sort(candidates);
+         List<List<Integer>> a= new ArrayList<>();
+        subsetsum(new ArrayList<Integer>() ,candidates, target, 0 , a);
+        return a;
     }
     
-public void helper(ArrayList<List<Integer>> ans, int[] nums, int target, ArrayList<Integer> values, int index){
+    public void subsetsum(ArrayList<Integer> ans, int[] candidates, int target, int index,  List<List<Integer>> a){
         
-        if(index==nums.length){
-            if(target==0){
-             ans.add(new ArrayList<>(values));
-             return;
-            }
+        if(target==0){
+           
+          System.out.println(ans);
+         a.add(new ArrayList<>(ans));
+          return;
             
-                return;
+        }
+      
+        if(index==candidates.length){
+          return;
+        }
+        if(target<candidates[index]){
+            return;
         }
         
-         if(target>=nums[index]){
+        
+        
+        else{
+            
+            //if target is greater than equal to the current number
+          
+            ans.add(candidates[index]);
          
-         values.add(nums[index]);
-         helper(ans,nums, target-nums[index],values, index);
-         values.remove(values.size()-1);
-         }
-        
-         helper(ans,nums, target,values, index+1);
-        
+            subsetsum(ans, candidates, target- candidates[index], index, a);
+         
+            ans.remove(ans.size()-1);
+            subsetsum(ans, candidates, target, index+1, a);
+           //or don;t add this number and move on
+            
+
+            
+        }
     }
+    
 }
