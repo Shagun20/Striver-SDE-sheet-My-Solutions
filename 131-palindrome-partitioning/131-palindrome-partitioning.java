@@ -37,8 +37,9 @@ class Solution {
   
   public void createpart(String s, int index, List<List<String>> ans,  List<String> a1){
     
-    if(index==  s.length()){
+    if(index==s.length()){
       ans.add(new ArrayList<>(a1));
+      return;
     }
     
     String h="";
