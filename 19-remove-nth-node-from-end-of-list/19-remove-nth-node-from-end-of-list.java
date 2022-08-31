@@ -9,56 +9,35 @@
  * }
  */
 class Solution {
-    int count=0;
-    ListNode prev=null;
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        // have 2 pointers, one starts from start,
-        //one from end
-        // when end count==n
-        // the one from end 
         
-       
-        ListNode delnode=remove(head, n);//if head is returned
-        if(delnode!=null){
-            head=delnode.next;
-        }
-        return head;
-        
-        
-        
+      ListNode slow=head, fast=head, prev=null;
+      
+       while(slow!=null){
+         
+         fast=slow;
+         for(int i=0;i<n-1;i++){
+           fast=fast.next;
+         }
+         
+         if(fast.next==null){
+           //slow is found
+           break;
+         }
+         
+         prev=slow;
+         slow=slow.next;
+       }
+      
+      
+      if(prev==null){
+        head= slow.next;
+      }
+      
+      else{
+        prev.next=slow.next;
+      }
+      
+      return head;
     }
-    
-     public ListNode remove(ListNode head, int n){
-         //returns the pointer to node to be removed
-         if(head.next==null){
-             count=1;
-             if(count==n){
-                 return head;
-             }
-             else{
-                 return null;
-             }
-             
-         }
-             
-         
-         
-         
-       
-         ListNode delnode= remove(head.next, n);
-         count++;
-         System.out.println(head.val+" "+ count);
-         if(count==n){
-           return head;
-         }
-         if(delnode!=null){
-             head.next=delnode.next;
-             return null;
-         }
-         
-         
-         return null;
-     } 
-    
-    
 }
