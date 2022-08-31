@@ -1,23 +1,19 @@
 class Solution {
     public void reverseString(char[] s) {
-     
-      reverse(0, s.length-1, s);
+        
+      int start=0;
+      int end=s.length-1;
       
+      
+      while(start<end){
+        //swap s[start] with s[end]
+        
+        char temp=s[start];
+        s[start]=s[end];
+        s[end]=temp;
+        start++;
+        end--;
+        
+      }
     }
-  
-  public void reverse(int start, int end, char[] s){
-    
-    
-    if(start>=end){
-      return;
-    }
-    
-    
-    //swap start and nd
-    char temp=s[end];
-    s[end]=s[start];
-    s[start]=temp;
-    
-    reverse(start+1, end-1,s);
-  }
 }
