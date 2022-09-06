@@ -1,57 +1,41 @@
 class Solution {
     public int search(int[] nums, int target) {
+      
+      int start=0;
+      int end=nums.length-1;
+      
+      while(start<=end){
+       
+        int mid= (start)+(end-start)/2;
         
-        
-        //find the pivot element in logn time
-        
-        // binary search in left and right halves
-        
-        
-        //or directly reard left and right subarrays
-        
-        int left=0;
-        int right= nums.length-1;
-        int mid=-1;
-    
-        while(left<=right){
-            mid= left+(right-left)/2;
-
-            if(nums[mid]==target){
-                return mid;
-                
-            }
-           else if(nums[mid]>= nums[left])
-                //if array is left sorted
-               
-           {
-               if(target<nums[mid] && target >= nums[left] ){
-                   right=mid-1;
-               }
-               //if it lies in left half
-               else{
-                   // then it must be in right half
-                   left=mid+1;
-               }
-           }
-            else{
-                //array is either left sorted or right sorted
-                
-                if(target<=nums[right] && target > nums[mid]){
-                   left=mid+1;
-               }
-                //right sorted array
-                
-                else{
-                    right=mid-1;
-                }
-            }
-               
-           
-              
-            
+        System.out.println(nums[start]+" "+nums[mid]+" "+ nums[end]);
+        if(nums[mid]==target){
+          return mid;
         }
+        
+       if(nums[start]<= nums[mid]){
+         //left sorted
+         if(nums[start]<=target && nums[mid]>target){
+           end= mid-1;
+         }
+         
+         else{
+           start=mid+1;
+         }
+       }
+        
+        else{
+          if(nums[mid]<=target && nums[end]>=target){
+            start= mid+1;
+          }
+          
+          else{
+            end=mid-1;
+          }
+        }
+        
+      }
+      
         return -1;
-        
-        
     }
 }
