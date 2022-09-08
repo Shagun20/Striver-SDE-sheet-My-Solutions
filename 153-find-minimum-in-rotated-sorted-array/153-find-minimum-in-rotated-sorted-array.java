@@ -4,9 +4,6 @@ class Solution {
       int start=0;
       int end=nums.length-1;
       
-      if(nums[start]<= nums[end]){
-        return nums[start];
-      }
       
       while(start<=end){
         
