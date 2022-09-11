@@ -1,35 +1,30 @@
 class Solution {
-  
-   
     public boolean canJump(int[] nums) {
-      
-      Boolean[] asf= new Boolean[nums.length];
-      int start=0, end=nums.length-1;
-      return helper(start, end, nums,asf);
         
-    }
-  
-    public boolean helper(int start, int dest, int[] nums, Boolean[] asf){
-      if(start==dest){
-        return true;
-      }
+      //using tabulation method
       
-      if(nums[start]==0){
-        return false;
-      }
+      boolean[] dp = new boolean[nums.length];
       
-      if(asf[start]!=null){
-        return (boolean)asf[start];
-      }
+      dp[nums.length-1]=true;
       
-      for(int i=1;i<=nums[start];i++){
-        if(helper(start+i,dest, nums,asf)==true){
-          asf[start]=true;
-          return true;
+      for(int i=nums.length-2;i>=0;i--){
+        
+        if(nums[i]==0){
+          dp[i]=false;
+        }
+        
+        else{
+          for(int j=1;j<=nums[i];j++){
+            if(i+j<nums.length && dp[i+j]==true){
+              dp[i]=true;
+              break;
+            }
+          }
+          
+          
         }
       }
       
-      asf[start]=false;
-      return false;
+      return dp[0];
     }
 }
