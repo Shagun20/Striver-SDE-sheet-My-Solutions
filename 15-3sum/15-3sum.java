@@ -1,59 +1,56 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         
+      
+      Arrays.sort(nums);
+      List<List<Integer>> ans= new ArrayList<>();
+      for(int i=0;i<nums.length-2;i++){
         
-        // first sort the array
-        List<List<Integer>> ans= new ArrayList<>();
-        Arrays.sort(nums);
-        
-        int low, high;
-        for(int i=0;i<nums.length;i++){
-            low=i+1;
-            high= nums.length-1;
-            //to remove dduplicate list possibility
-            if(i>0 && nums[i]==nums[i-1]){
-                continue;
-            }
-            
-            while(low<high){
-           //    System.out.println(i+" "+low+" "+high);
-               
-                    //to eliminate duplicates from list
-                    
-                    
-                
-                
-                 if(nums[i]+nums[low]+nums[high]==0){
-                        List<Integer> l1= new ArrayList<>();
-                        l1.add(nums[i]);
-                        l1.add(nums[low]);
-                        l1.add(nums[high]);
-                        ans.add(l1);
-                       
-                    while(low<high && nums[low]==nums[low+1]){
-                        low++;
-                    }
-                    
-                     while(low<high && nums[high]==nums[high-1]){
-                        high--;
-                    }
-                    
-                    low++;
-                    high--;
-                      
-                 }
-                
-                 else if(nums[low]+ nums[high] + nums[i] >0){
-                     high--;
-                 }
-                else{
-                    low++;
-                }
-            }
-          
-           
+        if(i!=0 && nums[i]==nums[i-1]){
+          continue;
         }
-        return ans;
         
+        int left=i+1;
+        int right=nums.length-1;
+        
+        while(left<right){
+          //System.out.println(nums[i]+" "+nums[left]+" "+nums[right]);
+          while(left<right && left-1!=i && nums[left]==nums[left-1]){
+            left++;
+          }
+        //  System.out.println(2+""+nums[i]+" "+nums[left]+" "+nums[right]);
+          while(left<right && right!=nums.length-1 && nums[right]==nums[right+1]){
+            right--;
+            
+          }
+          
+          if(left>=right){
+            break;
+          }
+          if(nums[left]+nums[right]+nums[i]==0){
+            List<Integer> a1= new ArrayList<>();
+            a1.add(nums[i]);
+            a1.add(nums[left]);
+            a1.add(nums[right]);
+            ans.add(a1);
+            left++;
+            right--;
+          }
+          
+          else if(nums[left]+nums[right]+nums[i]<0){
+            left++;
+          }
+          
+          else{
+            right--;
+          }
+          
+          
+          
+          
+        }
+      }
+      
+      return ans;
     }
 }
